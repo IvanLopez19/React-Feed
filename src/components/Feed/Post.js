@@ -1,4 +1,5 @@
 import React from 'react'
+import Proptypes from 'prop-types';
 
 const Post = props => {
     return(
@@ -23,6 +24,15 @@ const Post = props => {
             </footer>
         </article>
     );
+}
+
+Post.propTypes={
+	title:Proptypes.string,
+	name: Proptypes.string,
+	image: propTypes.string,
+	onClick: propTypes.func,
+	likes: propTypes.number,
+	text: propTypes.string,
 }
 
 export default Post;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Post from './Post'
+import {Helmet} from 'react-helmet';
 
 class ReactFeed extends Component {
   constructor(props){
@@ -43,7 +44,7 @@ class ReactFeed extends Component {
 		.then(res => res.json())
 		.then(data => {
 			this.setState({
-				posts: data.filteredPosts 
+				posts: data.filteredPosts || []
 			})
 
 		})
@@ -59,7 +60,7 @@ class ReactFeed extends Component {
       return (<Post
         key = {index}
         name = {post.user}
-		likes = {post.likes}
+		    likes = {post.likes}
         title = {post.title}
         text = {post.text}
         image = {post.image}
@@ -69,6 +70,11 @@ class ReactFeed extends Component {
     });
   
     return (
+      <>
+      <Helmet>
+        <title>React Feed</title>
+      </Helmet>
+      <button onClick={()=>this.logout()}></button>
       <div className = "container">
         <h1 className="display-3">ReactFeed</h1>
         <h2>Recent posts</h2>
@@ -77,6 +83,7 @@ class ReactFeed extends Component {
           {postsComponents}
         </div>
       </div>
+      </>
     );
   }
 }

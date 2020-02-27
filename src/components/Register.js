@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 
 const initState = {
 	username: "",
@@ -7,7 +9,7 @@ const initState = {
 	errorFlag: false,
 }
 
-export default class Register extends Component{
+class Register extends Component{
 	constructor(props){
 		super(props);
 
@@ -39,7 +41,7 @@ export default class Register extends Component{
 					res.json()
 					.then (data => {
 						localStorage.setItem('token', data.token);
-						this.setState({...initState})
+						this.props.history.push('/')
 					})
 				} else {
 					this.setState({
@@ -57,6 +59,10 @@ export default class Register extends Component{
 
 	render(){
 		return (
+			<>
+			<Helmet>
+				<title>Register</title>
+			</Helmet>
 			<div className="full-centered">
 				<div className = "jumbotron">
 					<h1 className="display-3">Registro</h1>
@@ -99,6 +105,9 @@ export default class Register extends Component{
 					}
 				</div>
 			</div>
+			</>
 		);
 	}
 }
+
+export default withRouter(Register);
